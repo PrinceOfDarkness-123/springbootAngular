@@ -1,0 +1,173 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<div ></div>
+    <form (ngSubmit)="onSubmit()" class="form-control" [formGroup]="myForm" novalidate> 
+        <legend id="legend">Job Application Form</legend>
+        <fieldset>{{ title }}</fieldset>
+        <div class="form-group">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon2">Full Name</span>
+                </div>
+                <input type="text" formControlName="fullname" name="fullname" placeholder="fullname" required [(ngModel)]="applicant.fullName" id="fullName" (keyup)="handleInput1($event)"
+                minlength="4" pattern="[A-Z][a-z].*">
+            <h4>{{ value1 }}</h4>
+                </div>
+        </div>
+        <div *ngIf="myForm.controls['fullname'].invalid && (myForm.controls['fullname'].dirty || myForm.controls['fullname'].touched)" class="alert alert-danger">
+            <div *ngIf="myForm.controls['fullname'].errors?.['required']">
+              Name is required.
+            </div>
+            <div *ngIf="myForm.controls['fullname'].errors?.['minlength']">
+                Name must be at least 4 characters long
+              </div>
+            <div *ngIf="myForm.controls['fullname'].errors?.['pattern']">
+                Name must be start with uppercase
+              </div>
+        </div>
+    
+        <div class="form-group">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon2">Email Address</span>
+                </div>
+                <input type="text" formControlName="email" name="email_address" required [(ngModel)]="applicant.emailAddress" placeholder="email_address" id="email_address" (keyup)="handleInput2($event)"
+                    pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+        <h4>{{ value2 }}</h4>
+                </div>
+        </div>
+        <div *ngIf="myForm.controls['email'].invalid && (myForm.controls['email'].dirty || myForm.controls['email'].touched)" class="alert alert-danger">
+            <div *ngIf="myForm.controls['email'].errors?.['required']">
+              Email is required.
+            </div>
+            <div *ngIf="myForm.controls['email'].errors?.['pattern']">
+                Email is not valid
+              </div>
+
+        </div>
+        
+    
+        <div class="form-group">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon2">Phone Number</span>
+                </div>
+                <input type="text" formControlName="phone" name="phone_number" required [(ngModel)]="applicant.phoneNumber" placeholder="phone_number" id="phone_number" (keyup)="handleInput3($event)"
+                pattern="^03[0-9]{2}-(?!1234567)(?!1111111)(?!7654321)[0-9]{7}$">
+        <h4>{{ value3 }}</h4>
+                </div>
+        </div>
+        <div *ngIf="myForm.controls['phone'].invalid && (myForm.controls['phone'].dirty || myForm.controls['phone'].touched)" class="alert alert-danger">
+            <div *ngIf="myForm.controls['phone'].errors?.['required']">
+              Phone number is required.
+            </div>
+            <div *ngIf="myForm.controls['phone'].errors?.['pattern']">
+                Phone number is invalid.
+              </div>
+        </div>
+    
+        <div class="form-group">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon2">Street Address</span>
+                </div>
+                <input type="text" formControlName="street" name="street_address" required [(ngModel)]="applicant.streetAddress" placeholder="street_address" id="street_address" (keyup)="handleInput4($event)">
+        <h4>{{ value4 }}</h4>
+                </div>
+        </div>
+        <div *ngIf="myForm.controls['street'].invalid && (myForm.controls['street'].dirty || myForm.controls['street'].touched)" class="alert alert-danger">
+            <div *ngIf="myForm.controls['street'].errors?.['required']">
+              Street Address is required.
+            </div>
+        </div>
+    
+        
+        
+        
+        
+        <fieldset>{{ title2 }}</fieldset>
+        
+           
+           <div class="form-group">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon2">Degree</span>
+                </div>
+                
+                <select formControlName="deg" name="degree" id="degree" required [(ngModel)]="applicant.degree" (change)="selectChangeHandler($event)">
+                    <option value="" selected="selected">Please Select</option>
+                    <option *ngFor="let item of items" [value]="item.name">{{ item.name }}</option>
+              
+    
+          </select>
+          <h4>{{ selectedDegree }}</h4> 
+            </div>
+        </div>   
+        <div *ngIf="myForm.controls['deg'].invalid && (myForm.controls['deg'].dirty || myForm.controls['deg'].touched)" class="alert alert-danger">
+            <div *ngIf="myForm.controls['deg'].errors?.['required']">
+              Please select degree.
+            </div>
+        </div>
+    
+           
+           <br>
+           <div class="form-group">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon2">School</span>
+                </div>
+                <input type="text" formControlName="sch" name="school" required [(ngModel)]="applicant.school" placeholder="school" id="school" (keyup)="handleInput5($event)">
+        <h4>{{ value5 }}</h4>
+                </div>
+        </div>
+        <div *ngIf="myForm.controls['sch'].invalid && (myForm.controls['sch'].dirty || myForm.controls['sch'].touched)" class="alert alert-danger">
+            <div *ngIf="myForm.controls['sch'].errors?.['required']">
+              School name is required.
+            </div>
+        </div>
+    
+        <fieldset>{{ title3 }}</fieldset>
+        <div class="form-group">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon2">Achievements</span>
+                </div>
+                <textarea name="achievements" formControlName="achieve" rows="4" cols="50" required [(ngModel)]="applicant.achievements" placeholder="Tell us your Achievements" id="achievements"></textarea>
+        <h4>{{ value6 }}</h4>
+                </div>
+        </div>
+        <div *ngIf="myForm.controls['achieve'].invalid && (myForm.controls['achieve'].dirty || myForm.controls['achieve'].touched)" class="alert alert-danger">
+            <div *ngIf="myForm.controls['achieve'].errors?.['required']">
+              Please tell us your achievements.
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon2">Total Years</span>
+                </div>
+                <input (change)="selectStart($event)" formControlName="start" id="start_date" required type="date" name="start_date" [(ngModel)]="applicant.startDate"> Start date: 
+                <input (change)="selectEnd($event)" formControlName="end" id="end_date" required [class]="classExpression" type="date" name="end_date" [(ngModel)]="applicant.endDate"> End date:<br><br> 
+                </div>
+                <h4>{{ start_date }}</h4>
+                <h4>{{ end_date }}</h4>
+                <div *ngIf="myForm.controls['start'].invalid && (myForm.controls['start'].dirty || myForm.controls['start'].touched)" class="alert alert-danger">
+                    <div *ngIf="myForm.controls['start'].errors?.['required']">
+                      Start Date is required.
+                    </div>
+                </div>
+                <div *ngIf="myForm.controls['end'].invalid && (myForm.controls['end'].dirty || myForm.controls['end'].touched)" class="alert alert-danger">
+                    <div *ngIf="myForm.controls['end'].errors?.['required']">
+                      Street Address is required.
+                    </div>
+                </div>
+        </div>
+    
+        <button type="submit" value="submit" class="btn btn-success"
+           [disabled]="myForm.pristine || myForm.invalid">Save</button>
+        
+     </form>
+
+
+ <div [hidden]="!submitted">
+   <h4>You submitted successfully</h4>
+ </div>
